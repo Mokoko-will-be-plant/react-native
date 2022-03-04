@@ -4,7 +4,7 @@ _강의 수강 목표 기간 : 3/4 ~ 3/18_
 
 ref: https://github.com/ZeroCho/food-delivery-app
 
-<br><hr><br>
+<hr><br>
 
 ## 공부 일정 & 학습 내용
 
