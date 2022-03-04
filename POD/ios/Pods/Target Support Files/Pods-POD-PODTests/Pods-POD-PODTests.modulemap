@@ -1,0 +1,6 @@
+module Pods_POD_PODTests {
+  umbrella header "Pods-POD-PODTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
