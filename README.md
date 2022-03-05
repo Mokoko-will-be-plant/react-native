@@ -15,11 +15,13 @@ ref: https://github.com/ZeroCho/food-delivery-app
 
 **_3/5_**
 
-- [ ] 강의 07 ~ 10
+- [x] 강의 07 ~ 09
+  > React Native 기본, 앱 이름 변경
 
 **_3/6_**
 
-- [ ] 강의 11 ~ 14
+- [ ] 강의 10 ~ 14
+  > 네비게이션 설정
 
 **_3/7_**
 
