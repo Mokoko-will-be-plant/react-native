@@ -20,7 +20,7 @@ ref: https://github.com/ZeroCho/food-delivery-app
 
 **_3/6_**
 
-- [ ] 강의 10 ~ 14
+- [x] 강의 10 ~ 14
   > 네비게이션 설정
 
 **_3/7_**
