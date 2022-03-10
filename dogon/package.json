@@ -23,7 +23,8 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
     "react-redux": "^7.2.6",
-    "redux-flipper": "^2.0.1"
+    "redux-flipper": "^2.0.1",
+    "socket.io-client": "^4.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
