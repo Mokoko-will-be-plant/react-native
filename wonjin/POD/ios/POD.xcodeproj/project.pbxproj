@@ -114,7 +114,6 @@
 				B8D39A9837E0C06B35129C5A /* Pods-POD-PODTests.debug.xcconfig */,
 				045D62A4E28D801760873E70 /* Pods-POD-PODTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -486,6 +485,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = POD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
