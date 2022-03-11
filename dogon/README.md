@@ -67,7 +67,10 @@ ref: https://github.com/ZeroCho/food-delivery-app
 
 **_3/11_**
 
-- [ ] 강의 34 ~ 36
+- [x] 강의 34 ~ 36
+  > 주문 목록 화면 만들기(FlatList)  
+  > 주문 수락, 거절 버튼 만들기  
+  > 토큰 재발급하기(axios interceptor)
 
 **_3/12_**
 
