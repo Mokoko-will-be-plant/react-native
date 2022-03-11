@@ -45,11 +45,12 @@ ref: https://github.com/ZeroCho/food-delivery-app
 
 **_3/11_**
 
-- [ ] 강의 21 ~ 33
+- [x] 강의 21
+  > redux 기본 설정
 
 **_3/12_**
 
-- [ ] 강의 34 ~ 36
+- [ ] 강의 22 ~ 36
 
 **_3/13_**
 
