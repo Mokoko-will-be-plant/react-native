@@ -1,7 +1,6 @@
 import React, {useCallback} from 'react';
 import {Alert, Pressable, StyleSheet, Text, View} from 'react-native';
 import axios, {AxiosError} from 'axios';
-import Config from 'react-native-config';
 import {useAppDispatch} from '../store';
 import userSlice from '../slices/user';
 import {useSelector} from 'react-redux';
@@ -14,7 +13,7 @@ function Settings() {
   const onLogout = useCallback(async () => {
     try {
       await axios.post(
-        `${Config.API_URL}/logout`,
+        'http://10.0.2.2:3105/logout',
         {},
         {
           headers: {
