@@ -50,11 +50,12 @@ ref: https://github.com/ZeroCho/food-delivery-app
 
 **_3/12_**
 
-- [ ] 강의 22 ~ 36
+- [x] 강의 22 ~ 30
+  > 회원가입, 로그인, 로그아웃 기능 구현<br>async storage, encrypt storage, redux, config 등 다양한 저장소 구분<br>토큰 관리<br>socket 통신
 
 **_3/13_**
 
-- [ ] 강의 37 ~ 40
+- [ ] 강의 31 ~ 40
 
 **_3/14_**
 

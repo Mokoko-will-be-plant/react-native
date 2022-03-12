@@ -15,8 +15,7 @@
 
 스택 네비게이션, 탭 네비게이션, 드로어 네비게이션  각각 네비게이션들이 뭔지 알아보자
 
-dogon: 내 깃허브에 정리해놓은 study 자료가 있음. 
-https://github.com/PsmD/study/blob/main/React%20native/Navigation.md
+> https://github.com/PsmD/study/blob/main/React%20native/Navigation.md
 
 # 3. 자료구조 stack과 queue가 뭔지 확인해보자
 
