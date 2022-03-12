@@ -25,7 +25,7 @@ function EachOrder({item}: Props) {
     }
     try {
       await axios.post(
-        `${Config.API_URL}/accept`,
+        '10.0.2.2:3105/accept',
         {orderId: item.orderId},
         {headers: {authorization: `Bearer ${accessToken}`}},
       );

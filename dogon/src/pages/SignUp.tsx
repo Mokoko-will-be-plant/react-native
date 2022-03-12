@@ -64,7 +64,7 @@ function SignUp({navigation}: SignUpScreenProps) {
     console.log(email, name, password);
     try {
       setLoading(true);
-      const response = await axios.post(`${Config.API_URL}/user`, {
+      const response = await axios.post('10.0.2.2:3105/user', {
         email,
         name,
         password,
