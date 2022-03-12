@@ -1,7 +1,7 @@
 import React, {useCallback, useRef, useState} from "react";
 import {Alert, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
-import {RootStackParamList} from "../../App";
+import {RootStackParamList} from "../../AppInner";
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 const SignIn = ({navigation}: SignInScreenProps) => {

@@ -12,6 +12,7 @@ import {
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import axios, {AxiosError} from 'axios';
 import Config from 'react-native-config'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {RootStackParamList} from '../../AppInner';
 import DismissKeyboardView from '../components/DismissKeyboardView';
 
@@ -65,18 +66,26 @@ function SignUp({navigation}: SignUpScreenProps) {
     
     try {
       setLoading(true);
-      console.log('env',Config.API_URL);
+      console.log('env',Config.API_URL_AND);
+      console.log('env',Config.API_URL_IOS);
+      /** none config */
       // const response = await axios.post(`${__DEV__ ? 'localhost:3105' : '실서버'}/user`, {
-        const response = await axios.post(`${Config.API_URL}/user`, {
+      
+      /** android */
+      const response = await axios.post(`${Config.API_URL_AND}/user`, {
+
+      /** ios */
+        // const response = await axios.post(`${Config.API_URL_IOS}/user`, {
         email,
         name,
         password
       });
       Alert.alert('알림', '회원가입 되었습니다.');
+      navigation.navigate('SignIn');
     } catch (err) {
       const errorRes = (err as AxiosError).response
       if(errorRes){
-        Alert.alert('알림', `회원가입에 실패하였습니다 :: ${errorRes.data.response}`);
+        Alert.alert('알림', errorRes.data.response);
       }
     } finally {
       setLoading(false);

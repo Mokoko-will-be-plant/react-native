@@ -15,6 +15,7 @@ const userSlice = createSlice({
       state.accessToken = action.payload.accessToken;
     },
   },
+  // 비동기 액션을 위한 리듀서
   extraReducers: builder => {},
 });
 
