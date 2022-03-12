@@ -10,11 +10,10 @@ import {
   View,
 } from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import axios, {AxiosError} from 'axios';
-import Config from 'react-native-config'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {RootStackParamList} from '../../AppInner';
 import DismissKeyboardView from '../components/DismissKeyboardView';
+import axios, {AxiosError} from 'axios';
+import Config from 'react-native-config';
+import {RootStackParamList} from '../../AppInner';
 
 type SignUpScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>;
 
@@ -36,8 +35,8 @@ function SignUp({navigation}: SignUpScreenProps) {
   const onChangePassword = useCallback(text => {
     setPassword(text.trim());
   }, []);
-  const onSubmit = useCallback(async() => {
-    if(loading){
+  const onSubmit = useCallback(async () => {
+    if (loading) {
       return;
     }
     if (!email || !email.trim()) {
@@ -63,34 +62,26 @@ function SignUp({navigation}: SignUpScreenProps) {
       );
     }
     console.log(email, name, password);
-    
     try {
       setLoading(true);
-      console.log('env',Config.API_URL_AND);
-      console.log('env',Config.API_URL_IOS);
-      /** none config */
-      // const response = await axios.post(`${__DEV__ ? 'localhost:3105' : '실서버'}/user`, {
-      
-      /** android */
-      const response = await axios.post(`${Config.API_URL_AND}/user`, {
-
-      /** ios */
-        // const response = await axios.post(`${Config.API_URL_IOS}/user`, {
+      const response = await axios.post(`${Config.API_URL}/user`, {
         email,
         name,
-        password
+        password,
       });
+      console.log(response.data);
       Alert.alert('알림', '회원가입 되었습니다.');
       navigation.navigate('SignIn');
-    } catch (err) {
-      const errorRes = (err as AxiosError).response
-      if(errorRes){
-        Alert.alert('알림', errorRes.data.response);
+    } catch (error) {
+      const errorResponse = (error as AxiosError).response;
+      console.error(errorResponse);
+      if (errorResponse) {
+        Alert.alert('알림', errorResponse.data.message);
       }
     } finally {
       setLoading(false);
     }
-  }, [loading, email, name, password]);
+  }, [loading, navigation, email, name, password]);
 
   const canGoNext = email && name && password;
   return (
@@ -153,14 +144,11 @@ function SignUp({navigation}: SignUpScreenProps) {
           }
           disabled={!canGoNext || loading}
           onPress={onSubmit}>
-            {loading
-              ? (
-                <ActivityIndicator />
-              )
-              : (
-                <Text style={styles.loginButtonText}>회원가입</Text>
-              )   
-            }
+          {loading ? (
+            <ActivityIndicator color="white" />
+          ) : (
+            <Text style={styles.loginButtonText}>회원가입</Text>
+          )}
         </Pressable>
       </View>
     </DismissKeyboardView>
