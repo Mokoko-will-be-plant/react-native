@@ -13,7 +13,7 @@ function Settings() {
   const onLogout = useCallback(async () => {
     try {
       await axios.post(
-        'http://10.0.2.2:3105/logout',
+        'http://localhost:3105/logout',
         {},
         {
           headers: {

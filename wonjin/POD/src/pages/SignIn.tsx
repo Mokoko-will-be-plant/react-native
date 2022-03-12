@@ -44,7 +44,7 @@ function SignIn({navigation}: SignInScreenProps) {
     }
     try {
       setLoading(true);
-      const response = await axios.post('http://10.0.2.2:3105/login', {
+      const response = await axios.post('http://localhost:3105/login', {
         email,
         password,
       });

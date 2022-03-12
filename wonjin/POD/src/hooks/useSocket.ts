@@ -16,7 +16,7 @@ const useSocket = (): [typeof socket, () => void] => {
   }, [isLoggedIn]);
   if (!socket && isLoggedIn) {
     console.log(!socket && isLoggedIn, '웹소켓 연결을 진행합니다.');
-    socket = SocketIOClient('http://10.0.2.2:3105', {
+    socket = SocketIOClient('http://localhost:3105', {
       transports: ['websocket'],
     });
   }

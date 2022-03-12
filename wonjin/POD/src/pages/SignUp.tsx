@@ -64,7 +64,7 @@ function SignUp({navigation}: SignUpScreenProps) {
     
     try {
       setLoading(true);
-      const response = await axios.post('http://10.0.2.2:3105/user', {
+      const response = await axios.post('http://localhost:3105/user', {
         email,
         name,
         password,
