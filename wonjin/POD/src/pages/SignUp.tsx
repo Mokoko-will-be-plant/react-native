@@ -12,7 +12,6 @@ import {
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import DismissKeyboardView from '../components/DismissKeyboardView';
 import axios, {AxiosError} from 'axios';
-import Config from 'react-native-config';
 import {RootStackParamList} from '../../AppInner';
 
 type SignUpScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>;
@@ -62,9 +61,10 @@ function SignUp({navigation}: SignUpScreenProps) {
       );
     }
     console.log(email, name, password);
+    
     try {
       setLoading(true);
-      const response = await axios.post(`${Config.API_URL}/user`, {
+      const response = await axios.post('http://localhost:3105/user', {
         email,
         name,
         password,

@@ -49,7 +49,7 @@ function AppInner() {
           return;
         }
         const response = await axios.post(
-          `${Config.API_URL}/refreshToken`,
+          '10.0.2.2:3105/refreshToken',
           {},
           {
             headers: {
@@ -113,7 +113,7 @@ function AppInner() {
             const refreshToken = await EncryptedStorage.getItem('refreshToken');
             // token refresh 요청
             const {data} = await axios.post(
-              `${Config.API_URL}/refreshToken`, // token refresh api
+              '10.0.2.2:3105/refreshToken', // token refresh api
               {},
               {headers: {authorization: `Bearer ${refreshToken}`}},
             );

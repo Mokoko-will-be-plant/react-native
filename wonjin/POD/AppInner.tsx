@@ -28,29 +28,25 @@ const Stack = createNativeStackNavigator();
 
 function AppInner() {
   const isLoggedIn = useSelector((state: RootState) => !!state.user.email);
-  console.log('isLoggedIn', isLoggedIn);
 
   const [socket, disconnect] = useSocket();
 
   useEffect(() => {
-    const helloCallback = (data: any) => {
-      console.log(data);
+    const callback = (data: any) => {
     };
     if (socket && isLoggedIn) {
-      console.log(socket);
-      socket.emit('login', 'hello');
-      socket.on('hello', helloCallback);
+      socket.emit('acceptOrder', 'hello');
+      socket.on('order', callback);
     }
     return () => {
       if (socket) {
-        socket.off('hello', helloCallback);
+        socket.off('order', callback);
       }
     };
   }, [isLoggedIn, socket]);
 
   useEffect(() => {
     if (!isLoggedIn) {
-      console.log('!isLoggedIn', !isLoggedIn);
       disconnect();
     }
   }, [isLoggedIn, disconnect]);
