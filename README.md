@@ -191,10 +191,147 @@ export default App;
 
 react의 useEffect는 componentDidMount와 componentDidUpdate, componentWillUnmount가 합쳐진 것이라고 생각하는 것이 좋다. 하지만 componentDidMount, componentDidUpdate와는 달리 effect는 브라우저가 화면을 업데이트하는 것을 차단하지 않는다. 때문에 더 향상된 반응성을 보여준다.
 
+<hr>
+
 2. Redux 사용 부분 주석 달아서 PR날릴것
+
+<hr>
 
 3. 세미나 내용 정리 (payload, flux 아키텍쳐)
 
+Flux 패턴은 react.js 처럼 데이터 흐름이 단방향으로 전달되는 소프트웨어 개발에서 사용된다.
+
+리덕스를 사용하는 구조에서는 전역 상태를 전부 하나의 저장소(store) 안에 있는 객체 트리에 저장하며, 상태를 변경하는 것은 어떤 일이 일어날지를 서술하는 객체인 액션(action)을 내보내는(dispatch) 것이 유일한 방법이다. 그리고 액션이 전체 애플리케이션의 상태를 어떻게 변경할지 명시하기 위해서는 리듀서(reducer)의 작성이 필요하다.
+
+Flux구조
+
+<img width="700" heigth="600" src= "https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png" />
+
+<br>
+
+- 액션 생성자(Action creator)
+
+액션이란 어떤 행위인지와 그 행위로부터 넘겨받은 값들을 가진 하나의 객체를 말한다. 따라서 어떤 액션인지를 가리키는 type 과 넘겨받은 값인 payload 를 가진다. 액션 생성자는 기존 상태를 변경하기 위한 액션의 생성을 담당하며 해당 액션을 생성해서 디스패쳐에 넘겨준다.
+
+- 디스패쳐(Dispatcher)
+
+디스패쳐는 모든 액션들을 받아서 의존성을 적절히 처리해준 다음 모든 스토어에게 넘긴다. 여기서 중요한 점은 모든 스토어가 모든 액션을 받는다는 것이다.
+
+- 스토어(Store)
+
+스토어는 모든 액션을 받아서 자신에게 적합한 액션이 어떤 건지 필터링한다. 이후 상태값을 변경하고 자신에게 연결된 컨트롤러 뷰에게 상태가 변화되었음을 알린다.
+
+- 컨트롤러 뷰(Controller View)와 뷰(View)
+
+여기서 컨트롤러 뷰는 전체적으로 화면에 나타는 자식 뷰들과 스토어를 연결하는 매개체이다. 자식 뷰들은 컨트롤러 뷰에게 변화된 상태를 받고 그 상태에 따라 다시 렌더링이 된다.
+
+- 리듀서(reducer)
+
+변화를 일으키는 함수로써 전달받은 액션을 가지고 새로운 상태를 만들어서 스토어에 전달한다. 이 모든 설계는 데이터가 단방향으로 흐른다는 전제하에 데이터의 일관성을 향상시키고 버그 발생 원인을 더 쉽게 파악하려는 의도에서 출발했다.
+
+<hr>
+
 4. useCallback vs useMemo
+
+## useCallback
+
+이는 최적화를 위한 훅이다. React에서 이벤트를 핸들링 할 때 보통 다음 코드처럼 컴포넌트 내부에 함수를 선언해서 사용한다.
+
+```
+function Component() {
+  const handleClick = () => console.log('clicked!')
+
+  return (
+    <button onClick={handleClick}>클릭해보세요!</button>
+  )
+}
+```
+
+- 위 코드는 별 문제가 되지 않는다. 하지만 컴포넌트가 렌더링 될 때 마다 함수를 새로 생성한다는 단점이 있다. 부모 컴포넌트가 렌더링되거나, 상태(state)가 변경되는 경우, React 컴포넌트는 렌더링을 유발한다.
+
+```
+function Component() {
+  const [count, setCount] = React.useState(0)
+  const handleClick = () => console.log('clicked!')
+
+  return (
+    <>
+      <button onClick={() => setCount(count + 1)}>카운트 올리기</button>
+      <button onClick={handleClick}>클릭해보세요!</button>
+    </>
+  )
+}
+```
+
+- 버튼을 클릭해서 count값을 변경하면 컴포넌트 내부의 상태를 변경하고, 재렌더링을 유발한다. 함수 컴포넌트의 렌더링이란, 다음 코드처럼 컴포넌트 함수가 새로 호출됨을 의미하고 이는 렌더링 때마다 새로 handleClick 함수를 생성한다.
+
+```
+Component() // count는 0. 최초 렌더링
+
+// setCount(count + 1)
+Component() // count는 1. 두번째 렌더링
+
+// setCount(count + 1)
+Component() // count는 2. 세번째 렌더링
+
+// setCount(count + 1)
+Component() // count는 3. 네번째 렌더링
+```
+
+- 이러면 불필요한 메모리를 낭비하고 최적화도 좋지 않다. 특정 상태의 변경과 상관없는 함수의 경 useCallback을 사용하면 매번 새로 생성되는 것을 방지할 수 있다.
+
+```
+function Component() {
+  const [count, setCount] = React.useState(0)
+  const handleClick = React.useCallback(
+    () => console.log('clicked!'),
+  []) // useCallback 사용
+
+  return (
+    <>
+      <button onClick={() => setCount(count + 1)}>카운트 올리기</button>
+      <button onClick={handleClick}>클릭해보세요!</button>
+    </>
+  )
+}
+```
+
+- 위 코드에선 useCallback으로 감싸기만 했을 뿐인데, 이전에 생성한 함수를 저장해두고 재사용한다. 함수의 동작은 똑같지만 좀 더 최적화가 좋다.
+
+<br>
+
+## useMemo
+
+useMemo 또한 useCallback과 매우 유사하게 최적화에 사용된다. useCallback이 함수를 반환하는 반면, 이것은 값을 반환한다. count값의 두배를 계산한 상태를 예시로 들어보면
+
+```
+function Component() {
+  const [count, setCount] = React.useState(0)
+  const doubleCount = count * 2
+
+  console.log(doubleCount) // 두배로 계산한 값 출력
+
+  return (
+    <>
+      <button onClick={() => setCount(count + 1)}>카운트 올리기</button>
+    </>
+  )
+}
+```
+
+- 버튼을 클릭할 때 마다 두배로 계산한 값을 출력한다. 하지만 count값과 무관하게 컴포넌트가 재렌더링 되었을 경우, 불필요한 연산을 하게 된다. 컴포넌트의 상태값이 많고 복잡한 연산의 경우 최적화가 좋지 않다.
+
+```
+const doubleCount = React.useMemo(() => count * 2, [count])
+```
+
+- 위처럼 useMemo를 사용하면 의존하는 값이 변경될 때에만 연산하므로 최적화가 개선된다.
+
+## 결론
+
+useMemo는 상태값을 반환하고, useCallback은 함수를 반환하는 차이를 제외하곤 없다.  
+**즉, useMemo가 특정 value를 재사용하기 위함이라면, useCallback은 특정 함수를 재사용하기 위함이다.**
+
+<hr>
 
 5. 강의 진도보다, 검색과 함께 이해해보려고 노력하고, 이해 안 되는 부분을 구체적으로 주석 달아둘 것
