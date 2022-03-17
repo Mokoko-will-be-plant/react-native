@@ -55,7 +55,7 @@ ref: https://github.com/ZeroCho/food-delivery-app
 
 **_3/17_**
 
-- [ ] 강의 31 ~ 32
+- [x] 강의 31 ~ 32
 > 리덕스 로직 구현
 
 **_3/18_**
