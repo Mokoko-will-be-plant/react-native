@@ -3,13 +3,14 @@ import SignUp from './src/pages/SignUp';
 import Orders from './src/pages/Orders';
 import Delivery from './src/pages/Delivery';
 import Settings from './src/pages/Settings';
-import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useSelector} from 'react-redux';
 import {RootState} from './src/store/reducer';
 import useSocket from './src/hooks/useSocket';
-import {useEffect} from 'react';
+import React, {useEffect} from 'react';
+import {useAppDispatch} from './src/store';
+import orderSlice from './src/slices/order';
 
 export type LoggedInParamList = {
   Orders: undefined;
@@ -27,12 +28,13 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function AppInner() {
+  const dispatch = useAppDispatch();
   const isLoggedIn = useSelector((state: RootState) => !!state.user.email);
-
   const [socket, disconnect] = useSocket();
 
   useEffect(() => {
     const callback = (data: any) => {
+      dispatch(orderSlice.actions.addOrder(data));
     };
     if (socket && isLoggedIn) {
       socket.emit('acceptOrder', 'hello');
