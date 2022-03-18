@@ -53,17 +53,17 @@ ref: https://github.com/ZeroCho/food-delivery-app
 - [x] 강의 22 ~ 30
   > 회원가입, 로그인, 로그아웃 기능 구현<br>async storage, encrypt storage, redux, config 등 다양한 저장소 구분<br>토큰 관리<br>socket 통신
 
-**_3/17_**
+**_3/17 ~ 3/18_**
 
 - [x] 강의 31 ~ 32
 > 리덕스 로직 구현
 
-**_3/18_**
+**_3/19_**
 
 - [ ] 강의 33 ~ 51
 > 네이버, T 맵 연동<br>네이티브 모듈 설정
 
-**_3/19 ~ 3/20_**
+**_3/20_**
 
 - [ ] 강의 52 ~ 62
   > 배포

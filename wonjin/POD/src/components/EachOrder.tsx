@@ -16,6 +16,7 @@ import {
   import {NavigationProp, useNavigation} from '@react-navigation/native';
   import {LoggedInParamList} from '../../AppInner';
   import NaverMapView, {Marker, Path} from 'react-native-nmap';
+import EncryptedStorage from 'react-native-encrypted-storage';
   
   interface Props {
     item: Order;
@@ -44,6 +45,27 @@ import {
           // 타인이 이미 수락한 경우
           Alert.alert('알림', errorResponse.data.message);
           dispatch(orderSlice.actions.rejectOrder(item.orderId));
+        }
+        if(errorResponse?.status === 419){
+          const refreshToken = await EncryptedStorage.getItem('refreshToken');
+          const response = await axios.post(
+            'http://localhost:3105/refreshToken',
+            {},
+            {
+              headers: {
+                authorization: `Bearer ${refreshToken}`
+              }
+            }
+          )
+          await axios.post(
+            'http://localhost:3105/acceptn',
+            {orderId: item.orderId},
+            {
+              headers: {
+                authorization: `Bearer ${response.data.data.accessToken}`
+              }
+            }
+          )
         }
       }
     }, [navigation, dispatch, item, accessToken]);
