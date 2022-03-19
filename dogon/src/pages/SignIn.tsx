@@ -20,6 +20,7 @@ import userSlice from '../slices/user';
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
 function SignIn({navigation}: SignInScreenProps) {
+  //store에서 가져온 dispatch 래핑 함수
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
@@ -51,7 +52,9 @@ function SignIn({navigation}: SignInScreenProps) {
       });
       console.log(response.data);
       Alert.alert('알림', '로그인 되었습니다.');
+      //밑의 액션 코드가 dispatch 되면 userSlice의 리듀서가 실행이 되는 식. 실행이 되면 action.payload에 데이터가 담기게 된다.
       dispatch(
+        //userSlice의 액션
         userSlice.actions.setUser({
           name: response.data.data.name,
           email: response.data.data.email,
