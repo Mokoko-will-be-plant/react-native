@@ -60,7 +60,7 @@ ref: https://github.com/ZeroCho/food-delivery-app
 
 **_3/19_**
 
-- [ ] 강의 33 ~ 51
+- [x] 강의 33 ~ 51
 > 네이버, T 맵 연동<br>네이티브 모듈 설정
 
 **_3/20_**
