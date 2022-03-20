@@ -331,3 +331,9 @@ const doubleCount = React.useMemo(() => count * 2, [count])
 
 useMemo는 상태값을 반환하고, useCallback은 함수를 반환하는 차이를 제외하곤 없다.  
 **즉, useMemo가 특정 value를 재사용하기 위함이라면, useCallback은 특정 함수를 재사용하기 위함이다.**
+
+<hr>
+
+# Week 3
+
+**dogon의 코로나 확진 이슈로 인한 3주차 세미나 보류**
