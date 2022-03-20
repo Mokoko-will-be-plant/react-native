@@ -1,6 +1,6 @@
 # 배달 앱 클론 코딩 - ZeroCho
 
-_강의 수강 목표 기간 : 3/4 ~ 3/18_
+_강의 수강 기간 : 3/4 ~ _
 
 ref: https://github.com/ZeroCho/food-delivery-app
 
@@ -60,10 +60,10 @@ ref: https://github.com/ZeroCho/food-delivery-app
 
 **_3/19_**
 
-- [x] 강의 33 ~ 51
-> 네이버, T 맵 연동<br>네이티브 모듈 설정
+- [x] 강의 33 ~ 34
+> 네이버 맵 연동
 
-**_3/20_**
+**_3/19_**
 
-- [ ] 강의 52 ~ 62
-  > 배포
+- [x] 강의 35
+> 권한 로직 구현
