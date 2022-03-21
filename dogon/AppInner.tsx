@@ -17,6 +17,7 @@ import userSlice from './src/slices/user';
 import {useAppDispatch} from './src/store';
 import Config from 'react-native-config';
 import orderSlice from './src/slices/order';
+import usePermissions from './src/hooks/usePermissions';
 
 export type LoggedInParamList = {
   Orders: undefined;
@@ -24,7 +25,6 @@ export type LoggedInParamList = {
   Delivery: undefined;
   Complete: {orderId: string};
 };
-
 export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
@@ -40,6 +40,8 @@ function AppInner() {
 
   const [socket, disconnect] = useSocket();
 
+  usePermissions();
+
   // 앱 실행 시 토큰 있으면 로그인하는 코드
   useEffect(() => {
     const getTokenAndRefresh = async () => {
@@ -49,7 +51,7 @@ function AppInner() {
           return;
         }
         const response = await axios.post(
-          '10.0.2.2:3105/refreshToken',
+          `${Config.API_URL}/refreshToken`,
           {},
           {
             headers: {
@@ -113,7 +115,7 @@ function AppInner() {
             const refreshToken = await EncryptedStorage.getItem('refreshToken');
             // token refresh 요청
             const {data} = await axios.post(
-              '10.0.2.2:3105/refreshToken', // token refresh api
+              `${Config.API_URL}/refreshToken`, // token refresh api
               {},
               {headers: {authorization: `Bearer ${refreshToken}`}},
             );
@@ -139,7 +141,7 @@ function AppInner() {
       <Tab.Screen
         name="Delivery"
         component={Delivery}
-        options={{title: '내 오더'}}
+        options={{headerShown: false}}
       />
       <Tab.Screen
         name="Settings"
