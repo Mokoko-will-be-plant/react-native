@@ -89,7 +89,11 @@ ref: https://github.com/ZeroCho/food-delivery-app
 
 **_3/22_**
 
-- [ ] 강의 41 ~ 44
+- [x] 강의 41 ~ 44
+  > 이미지 선택해서 리사이징하기  
+  > RN에서 폼데이터 사용해서 이미지 업로드하기  
+  > 네이티브 모듈 수정하기  
+  > patch-package 수행하기
 
 **_3/23_**
 
