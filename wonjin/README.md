@@ -1,6 +1,4 @@
-# 배달 앱 클론 코딩 - ZeroCho
-
-_강의 수강 기간 : 3/4 ~ _
+# 배달 앱 클론 코딩
 
 ref: https://github.com/ZeroCho/food-delivery-app
 
